@@ -45,7 +45,7 @@ def show_all_playlists():
 def show_playlist(playlist_id):
     """Show detail on specific playlist."""
 
-    playlist = Playlist.query.get(playlist_id)
+    playlist = Playlist.query.get_or_404(playlist_id)
 
     return render_template("playlist.html", playlist=playlist)
 
@@ -147,3 +147,13 @@ def add_song_to_playlist(playlist_id):
     return render_template("add_song_to_playlist.html",
                            playlist=playlist,
                            form=form)
+
+
+##############################################################################
+# Error Handling
+
+@app.errorhandler(404)
+def page_not_found(evt):
+    """ Handle a 404 error and display custom error page """
+
+    return render_template("404.html"), 404
