@@ -1,14 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-  <div>
-    <h1>{{ song.title }}!</h1>
+<div class="row">
+  <div class="col-8">
+    <h1>{{ song.title }}</h1>
     <p class="lead">&ndash; {{ song.artist }}</p>
+
+    <a class="btn btn-secondary btn-sm" href="/">
+      Home
+    </a>
+    <a class="btn btn-danger btn-sm" href="/songs">
+      Back to song list
+    </a>
   </div>
 
-  <ul>
-    DISPLAY ALL OF THE PLAYLISTS THAT THIS SONG IS A PART OF
-  </ul>
+
+
+  <div class="col-4">
+    <div class="fs-3 text-center">
+      <div>Playlists</div>
+      <div class="fst-italic text-decoration-underline">{{song.title}}</div>
+      <div class="mb-3"> appears on: </div>
+    </div>
+
+
+    <ul class="list-group list-group-flush">
+      {% for playlist in song.playlists %}
+      <li class="list-group-item fs-5">
+        <a href="/playlists/{{playlist.id}}" class="text-decoration-none link-danger">{{
+          playlist.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</div>
 
 {% endblock %}

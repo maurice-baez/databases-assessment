@@ -2,16 +2,14 @@
 
 {% block content %}
 
-<h1>Add a new song</h1>
-
-<form id="song-add-form" method="POST">
+<form id="playslist-edit-form" method="POST">
   {{ form.hidden_tag() }}
 
   {% for field in form
   if field.widget.input_type != 'hidden' %}
 
   <p>
-    {{ field.label (class="mb-3") }}
+    {{ field.label }}
     {{ field (class="form-control") }}
 
     {% for error in field.errors %}
@@ -20,12 +18,10 @@
   </p>
 
   {% endfor %}
-
   <div class="text-center">
-    <button type="submit" class="btn btn-secondary col-2 py-3">
-      Add Song
+    <button type="submit" class="btn btn-secondary col-2 p-3">
+      Edit
     </button>
-    <a href="/songs" class="btn btn-danger col-2 py-3">Cancel</a>
   </div>
 </form>
 

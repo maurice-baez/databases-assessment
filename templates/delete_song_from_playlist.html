@@ -2,16 +2,16 @@
 
 {% block content %}
 
-  <h1>Add a song to {{ playlist.name }}</h1>
+  <h1>Delete a song from {{ playlist.name }}</h1>
 
-  <form id="add-song-to-playlist-form" method="POST">
+  <form id="delete-song-from-playlist-form" method="POST">
     {{ form.hidden_tag() }}
 
     {% for field in form
            if field.widget.input_type != 'hidden' %}
 
       <p>
-        {{ field.label (class="mb-3") }}
+        {{ field.label }}
         {{ field (class="form-control") }}
 
         {% for error in field.errors %}
@@ -21,6 +21,6 @@
 
     {% endfor %}
 
-    <button type="submit" class="btn btn-secondary">Add</button>
+    <button type="submit" class="btn btn-danger">Delete</button>
   </form>
 {% endblock %}

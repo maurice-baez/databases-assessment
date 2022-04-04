@@ -1,23 +1,75 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row">
+  <div class="col-8">
 
-  <div>
-    <h1>{{ playlist.name }}!</h1>
-    {% if playlist.description %}
-      <p class="lead">{{ playlist.description }}</p>
-    {% endif %}
+    <div class="row">
+      <div class="col-12">
+        <h1 class="fs-1 my-4">{{ playlist.name }}</h1>
+        {% if playlist.description %}
+        <p class="fs-4">{{ playlist.description }}</p>
+        {% else %}
+        <p class="fs-4 lead">
+          No description has been entered yet...
+        </p>
+        {% endif %}
+
+      </div>
+
+
+      <div class="col-3">
+        <a class="btn btn-secondary mt-5" href="/playlists/{{ playlist.id }}/edit">
+          Edit Playlist
+        </a>
+      </div>
+
+      <div class="col-3">
+        <form action="/playlists/{{playlist.id}}/delete" method="POST" class="mb-3">
+          <button class="btn btn-danger mt-5">Delete playlist</button>
+        </form>
+      </div>
+
+
+    </div>
   </div>
 
 
-  <div class="text-danger">
-    Songs
+  <div class="col-4">
+    <div class="text-center">
+      <h1 class="fs-1 mt-4">TRACKS</h1>
+    </div>
+
+    <ul class="list-group list-group-flush mb-4">
+      {% for song in playlist.songs %}
+      <li class="list-group-item fs-6">
+        {{ song.artist }} -
+        <a href="/songs/{{song.id}}" class="link-danger text-decoration-none"> {{ song.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+
+
+    <div class="row mt-4">
+      <div class="col-4">
+        <a class="btn btn-secondary" href="/playlists/{{ playlist.id }}/add-song">
+          Add song
+        </a>
+      </div>
+      <div class="col-6">
+        <form action="/playlists/{{playlist.id}}/delete_song">
+          <button class="btn btn-danger">
+            Delete song
+          </button>
+        </form>
+      </div>
+    </div>
+
   </div>
 
-  <p>
-    <a class="btn btn-primary" href="/playlists/{{ playlist.id }}/add-song">
-      Add Song To Playlist
-    </a>
-  </p>
+</div>
+
+
 
 {% endblock %}

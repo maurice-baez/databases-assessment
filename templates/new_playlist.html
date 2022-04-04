@@ -6,20 +6,23 @@
   {{ form.hidden_tag() }}
 
   {% for field in form
-         if field.widget.input_type != 'hidden' %}
+  if field.widget.input_type != 'hidden' %}
 
-    <p>
-      {{ field.label }}
-      {{ field }}
+  <p>
+    {{ field.label }}
+    {{ field (class="form-control") }}
 
-      {% for error in field.errors %}
-        {{ error }}
-      {% endfor %}
-    </p>
+    {% for error in field.errors %}
+    {{ error }}
+    {% endfor %}
+  </p>
 
   {% endfor %}
-
-  <button type="submit" class="btn btn-primary">Add</button>
+  <div class="text-center">
+    <button type="submit" class="btn btn-secondary col-2 p-3">
+      Add Playlist
+    </button>
+  </div>
 </form>
 
 {% endblock %}
